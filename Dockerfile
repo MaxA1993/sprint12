@@ -2,10 +2,14 @@ FROM golang:1.23.2
 
 WORKDIR /app
 
+COPY go.mod go.sum ./
+
+RUN go mod download
+
 COPY . .
 
-RUN go mod tidy
+RUN go build -o /my_app
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /main main.go
+COPY tracker.db /app/tracker.db
 
-CMD ["/main"]
+CMD ["/my_app"]
