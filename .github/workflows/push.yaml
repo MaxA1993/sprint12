@@ -1,4 +1,4 @@
-name: golang-pipelin
+name: golang-pipeline
 
 on:
   push:
